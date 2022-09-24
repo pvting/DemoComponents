@@ -2,12 +2,14 @@ package com.pvting.threadpool.lib;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -170,7 +172,13 @@ public class ThreadPoolFactory {
     private static class ScheduledThreadPoolHolder {
         static ScheduledThreadPoolExecutor sScheduledThreadPool = new ScheduledThreadPoolExecutor(
             CORE_POOL_SIZE * 2 + 1,
-            new MyThreadFactory("schedule"), new RejectHandler());
+            new MyThreadFactory("schedule"), new RejectedExecutionHandler() {
+            @Override
+            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                //TODO:使用订阅信息的方法
+                Log.d("JAVA", "任务队列已满 任务被拒绝了"+r.toString());
+            }
+        });
     }
 
     private static class CacheThreadPoolHolder {
@@ -178,5 +186,12 @@ public class ThreadPoolFactory {
         static ThreadPoolExecutor sCacheThreadPool = new ThreadPoolExecutor(0, CORE_POOL_SIZE * 2 + 1, 60L,
             TimeUnit.SECONDS, blockingQueue, new MyThreadFactory("cache"),
             new ThreadPoolExecutor.DiscardPolicy());
+    }
+
+    public enum ThreadPoolType {
+        FIXED,//固定数量
+        SINGLE,//单线程池
+        CACHE,//缓存线程池
+        SCHEDULE//周期执行任务线程池
     }
 }

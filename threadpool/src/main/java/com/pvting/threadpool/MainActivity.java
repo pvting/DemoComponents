@@ -18,7 +18,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
-
+    String TAG="MyMainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         Future<String> future = ThreadPoolFactory.execute(r);
+
+        try {
+            Log.d(TAG, "onCreate: "+future.get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ThreadPoolFactory.executeOnUIThread(new Runnable() {
             @Override
             public void run() {
@@ -46,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 SystemClock.sleep(2000);
                 String a="0987654321";
-                System.out.println(a);
+                Log.d(TAG, "run: "+a);
             }
-        })
+        });
     }
 }
