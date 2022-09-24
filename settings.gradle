@@ -16,3 +16,4 @@ rootProject.name = "DemoComponents"
 include ':app'
 include ':cppdemo'
 include ':threadpool'
+include ':dynamicproxy'
