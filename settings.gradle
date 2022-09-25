@@ -3,6 +3,16 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+
+//setting repositories中的依赖目录
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
+        maven { url 'https://maven.aliyun.com/repository/public' }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +20,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+//setting repositories中的依赖目录
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
+        maven { url 'https://maven.aliyun.com/repository/public' }
     }
 }
 rootProject.name = "DemoComponents"
@@ -19,3 +39,6 @@ include ':threadpool'
 include ':dynamicproxy'
 include ':customcontrols'
 include ':optimizelayout'
+include ':optimizetime'
+include ':aspectjaop'
+
