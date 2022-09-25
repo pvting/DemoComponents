@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         Future<String> future = ThreadPoolFactory.execute(r);
-
         try {
             Log.d(TAG, "onCreate: "+future.get());
         } catch (ExecutionException e) {
@@ -53,5 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "run: "+a);
             }
         });
+
+        Thread t = new Thread();
+        t.start();
+
     }
 }
