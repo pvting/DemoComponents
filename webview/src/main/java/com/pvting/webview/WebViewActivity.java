@@ -5,7 +5,6 @@ import static android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,8 +20,6 @@ public class WebViewActivity extends AppCompatActivity {
 
     private final static String URL = "url";
     private final static String TAG = "WebViewActivity";
-
-
     private WebView mWebView;
 
     @Override
@@ -30,7 +27,6 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         mWebView = findViewById(R.id.web_webview);
-
         String url = getIntent().getStringExtra(URL);
         if (!TextUtils.isEmpty(url)) {
             loadH5(url);
@@ -48,10 +44,7 @@ public class WebViewActivity extends AppCompatActivity {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setUseWideViewPort(true);
-        if (Build.VERSION.SDK_INT >= 21) {
-            this.mWebView.getSettings().setMixedContentMode(MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        mWebView.setWebViewClient(new WebViewClient());
+        this.mWebView.getSettings().setMixedContentMode(MIXED_CONTENT_ALWAYS_ALLOW);
         mWebView.setWebChromeClient(new WebChromeClient());
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
@@ -75,8 +68,14 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
         mWebView.loadUrl(url);
-    }
 
+        //js调用java
+        mWebView.addJavascriptInterface(new AndroidtoJs(), "jsObject");//对应jsCallAndroid.html
+        mWebView.postDelayed(() -> {
+            //java调用js
+            mWebView.loadUrl("javascript:callJS()");//对应javascript.html
+        },3000);
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -91,8 +90,4 @@ public class WebViewActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

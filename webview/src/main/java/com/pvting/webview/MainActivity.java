@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebViewActivity.start(MainActivity.this,"https://www.baidu.com");
+//                WebViewActivity.start(MainActivity.this,"file:///android_asset/javascript.html");
+                WebViewActivity.start(MainActivity.this,"file:///android_asset/jsCallAndroid.html");
+
             }
         });
     }
