@@ -1,7 +1,11 @@
 package com.pvting.democomponents
 
 import android.os.Bundle
+import android.os.SystemClock
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.pvting.democomponents.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +21,23 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
 
+        val finalPassedCount = MutableLiveData<Int>()
+        finalPassedCount.value = 1
+//        finalPassedCount.observe(this, Observer {
+//            Log.d("TAG111", "onCreate: "+it)
+//        })
+
+        Thread(){
+            run {
+                SystemClock.sleep(1000)
+                runOnUiThread(Runnable{
+                    finalPassedCount.observe(this, Observer {
+                        Log.d("TAG111", "onCreate2: "+it)
+                    })
+                })
+
+            }
+        }.start()
 
     }
 

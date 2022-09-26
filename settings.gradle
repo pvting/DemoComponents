@@ -42,3 +42,4 @@ include ':optimizelayout'
 include ':optimizetime'
 include ':aspectjaop'
 
+include ':webview'
