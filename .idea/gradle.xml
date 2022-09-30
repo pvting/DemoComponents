@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/cppdemo" />
             <option value="$PROJECT_DIR$/customcontrols" />
             <option value="$PROJECT_DIR$/dynamicproxy" />
+            <option value="$PROJECT_DIR$/objectpool" />
             <option value="$PROJECT_DIR$/optimizelayout" />
             <option value="$PROJECT_DIR$/optimizetime" />
             <option value="$PROJECT_DIR$/threadpool" />

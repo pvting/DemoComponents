@@ -43,3 +43,4 @@ include ':optimizetime'
 include ':aspectjaop'
 
 include ':webview'
+include ':objectpool'
