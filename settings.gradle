@@ -44,3 +44,4 @@ include ':aspectjaop'
 
 include ':webview'
 include ':objectpool'
+include ':tests'
