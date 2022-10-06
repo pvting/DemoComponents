@@ -12,6 +12,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/aroute" />
+            <option value="$PROJECT_DIR$/aroute-annotations" />
+            <option value="$PROJECT_DIR$/aroute-annotations2" />
+            <option value="$PROJECT_DIR$/aroute-compiler" />
+            <option value="$PROJECT_DIR$/aroute-compiler2" />
             <option value="$PROJECT_DIR$/aspectjaop" />
             <option value="$PROJECT_DIR$/broadcastreceiver" />
             <option value="$PROJECT_DIR$/cppdemo" />

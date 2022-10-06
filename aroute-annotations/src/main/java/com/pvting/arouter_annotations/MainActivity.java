@@ -1,12 +1,9 @@
-package com.pvting.aroute;
+package com.pvting.arouter_annotations;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.pvting.arouter_annotations.ARouter;
-
-@ARouter(path = "aaaa")
 public class MainActivity extends AppCompatActivity {
 
     @Override
