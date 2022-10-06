@@ -11,13 +11,18 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/aroute" />
             <option value="$PROJECT_DIR$/aspectjaop" />
+            <option value="$PROJECT_DIR$/broadcastreceiver" />
             <option value="$PROJECT_DIR$/cppdemo" />
             <option value="$PROJECT_DIR$/customcontrols" />
             <option value="$PROJECT_DIR$/dynamicproxy" />
+            <option value="$PROJECT_DIR$/glide" />
             <option value="$PROJECT_DIR$/objectpool" />
             <option value="$PROJECT_DIR$/optimizelayout" />
             <option value="$PROJECT_DIR$/optimizetime" />
+            <option value="$PROJECT_DIR$/recyclerview" />
+            <option value="$PROJECT_DIR$/tests" />
             <option value="$PROJECT_DIR$/threadpool" />
             <option value="$PROJECT_DIR$/webview" />
           </set>

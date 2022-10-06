@@ -30,6 +30,9 @@ dependencyResolutionManagement {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
         maven { url 'https://maven.aliyun.com/repository/public' }
+
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
     }
 }
 rootProject.name = "DemoComponents"
@@ -45,3 +48,7 @@ include ':aspectjaop'
 include ':webview'
 include ':objectpool'
 include ':tests'
+include ':recyclerview'
+include ':glide'
+include ':broadcastreceiver'
+include ':aroute'
