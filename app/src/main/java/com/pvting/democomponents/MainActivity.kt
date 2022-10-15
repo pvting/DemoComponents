@@ -1,8 +1,11 @@
 package com.pvting.democomponents
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -17,6 +20,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.sampleText.post {
+            Log.e("getheitest:", "onCreate: " + binding.sampleText.height)
+        }
+
+
 
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
