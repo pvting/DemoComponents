@@ -33,6 +33,7 @@
             <option value="$PROJECT_DIR$/optimizetime" />
             <option value="$PROJECT_DIR$/recyclerview" />
             <option value="$PROJECT_DIR$/reentrantlock" />
+            <option value="$PROJECT_DIR$/serialport" />
             <option value="$PROJECT_DIR$/tests" />
             <option value="$PROJECT_DIR$/threadpool" />
             <option value="$PROJECT_DIR$/webview" />

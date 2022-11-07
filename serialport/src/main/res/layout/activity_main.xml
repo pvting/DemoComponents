@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/bt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取所有的串口"
+        android:onClick="getSerialList"/>
+    <TextView
+        android:id="@+id/tv_serial_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="串口如下："/>
+    <Button
+        android:id="@+id/bt_open_serial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打开串口"
+        android:onClick="openSerial"/>
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="请输入数据："/>
+    <Button
+        android:id="@+id/bt_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送"
+        android:onClick="sendData"/>
+
+
+
+</LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
