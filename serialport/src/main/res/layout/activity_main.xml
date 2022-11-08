@@ -26,6 +26,12 @@
         android:layout_height="wrap_content"
         android:text="打开串口"
         android:onClick="openSerial"/>
+    <Button
+        android:id="@+id/bt_close_serial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭串口"
+        android:onClick="closeSerial"/>
     <EditText
         android:id="@+id/et_input"
         android:layout_width="wrap_content"

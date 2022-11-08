@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private  final  String TAG ="serialport";
     private  final  String DRIVERS_PATH = "/proc/tty/drivers";
     private static final String DEFAULT_PATH_SP = "ttyMT1";
+    private byte[] data = {0x55, (byte) 0xaa,0x0a,0x13,0x00,0x0a,0x00,0x00,0x00, 0x00};
 
 
     TextView textView;
@@ -37,10 +38,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       textView= findViewById(R.id.tv_serial_txt);
+        textView= findViewById(R.id.tv_serial_txt);
         editText =findViewById(R.id.et_input);
         mSerialPortManager = new SerialPortManager();
-//        openSerial();
+    }
+
+    private void calcVerity(byte[] data){
+        int x=0;
+        for (int i = 0; i < data.length-1; i++) {
+            x^=data[i];
+        }
+        data[data.length-1] = (byte)x;
+    }
+
+    public static String bytes2HexString(byte[] bytes) {
+        if (null == bytes) {
+            return "";
+        }
+        StringBuilder buf = new StringBuilder(bytes.length * 2);
+        for (byte b : bytes) { // 使用String的format方法进行转换
+            buf.append(String.format("%02x", b & 0xff));
+        }
+        return buf.toString();
     }
 
     private void openSerial() {
@@ -71,8 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .setOnSerialPortDataListener(new OnSerialPortDataListener() {
                     @Override
                     public void onDataReceived(byte[] bytes) { // 接收到串口数据的监听函数
-                        Log.d(TAG, "SerialPortActivity onDataReceived [ byte[] ]: " + Arrays.toString(bytes));
-                        Log.d(TAG, "SerialPortActivity onDataReceived [ String ]: " + new String(bytes));
+                        Log.d(TAG, "SerialPortActivity onDataReceived [ byte[] ]: " + bytes2HexString(bytes));
                         final byte[] finalBytes = bytes;
                         runOnUiThread(new Runnable() {
                             @Override
@@ -88,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
                      */
                     @Override
                     public void onDataSent(byte[] bytes) { // 发送串口数据的监听函数
-                        Log.d(TAG, "SerialPortActivity onDataSent [ byte[] ]: " + Arrays.toString(bytes)); // onDataSent [ byte[] ]: [97] 【发送2】
-                        Log.d(TAG, "SerialPortActivity onDataSent [ String ]: " + new String(bytes)); // onDataSent [ String ]: a
+                        Log.d(TAG, "SerialPortActivity onDataSent [ byte[] ]: " + bytes2HexString(bytes)); // onDataSent [ byte[] ]: [97] 【发送2】
                         final byte[] finalBytes = bytes;
                         runOnUiThread(new Runnable() {
                             @Override
@@ -121,11 +138,16 @@ public class MainActivity extends AppCompatActivity {
 
     //可以读取到串口列表
     public void sendData(View v)  {
-        mSerialPortManager.sendBytes(editText.getText().toString().getBytes(StandardCharsets.UTF_8));
+        calcVerity(data);
+        mSerialPortManager.sendBytes(data);
     }
 
     public void openSerial(View v){
         openSerial();
+    }
+
+    public void closeSerial(View v){
+        mSerialPortManager.closeSerialPort();
     }
 
 }
