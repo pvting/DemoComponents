@@ -12,7 +12,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView tv = findViewById(R.id.tv);
-        tv.setText(stringFromJNI());
+//        tv.setText(stringFromJNI());
+
+        testAnyArgs(true,99,11.11,12.12f,9999,"你好",null,null);
     }
 
 
@@ -21,4 +23,7 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("cppdemo");
     }
+
+    //java的各种类型传递到C中
+    public native void testAnyArgs(boolean b,int i,double d,float f,long l,String str,int[] intArray,String[] strArray);
 }
