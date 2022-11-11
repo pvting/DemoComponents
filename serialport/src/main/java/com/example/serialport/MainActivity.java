@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
     //可以读取到串口列表
     public void sendData(View v)  {
-        calcVerity(data);
-        mSerialPortManager.sendBytes(data);
+        //calcVerity(data);
+        mSerialPortManager.sendBytes(editText.getText().toString().getBytes());
     }
 
     public void openSerial(View v){
