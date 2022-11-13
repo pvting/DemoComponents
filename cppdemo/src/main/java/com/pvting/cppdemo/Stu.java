@@ -23,4 +23,22 @@ public class Stu {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Stu{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    Stu(int id){
+        this.id = id;
+    }
+    Stu(int id ,int id2){
+        this.id=id+id2;
+    }
+    Stu(){
+
+    }
 }

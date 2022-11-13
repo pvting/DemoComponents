@@ -68,6 +68,55 @@ Java_com_pvting_cppdemo_MainActivity_testAnyArgs(JNIEnv *env, jobject thiz, jboo
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_pvting_cppdemo_MainActivity_testObject(JNIEnv *env, jobject thiz, jobject stu) {
-    //4.java给C++传一个对象，读取值，修改值，调用方法，
+Java_com_pvting_cppdemo_MainActivity_testObject(JNIEnv *env, jobject thiz, jobject stu,jstring jstr) {
+    //4.java给C++传一个对象，读取值，修改值，调用方法
+    const char * _str = env->GetStringUTFChars(jstr,NULL);
+    jclass stuclass = env->GetObjectClass(stu);//步骤一：直接通过对象获取class
+    jmethodID toString = env->GetMethodID(stuclass,"toString","()Ljava/lang/String;");//步骤二：获取method
+    jstring results = (jstring) env->CallObjectMethod(stu, toString); //步骤三：调用方法
+    const char * result = env->GetStringUTFChars(results,NULL);
+    LOGD("####%s",result)
+    env->ReleaseStringUTFChars(results,result);
+
+    jmethodID setNameMethod = env->GetMethodID(stuclass,"setName", "(Ljava/lang/String;)V");
+    jstring names = env->NewStringUTF(_str);
+    env->CallVoidMethod(stu,setNameMethod,names);
+
+    env->DeleteLocalRef(stuclass);
+}
+
+jclass stu = nullptr;
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_pvting_cppdemo_MainActivity_createObject(JNIEnv *env, jobject thiz) {
+    //创建一个JAVA对象，并调用方法
+    jclass stuClass = env->FindClass("com/pvting/cppdemo/Stu");
+    jobject person = env->AllocObject(stuClass);
+
+    jmethodID setName = env->GetMethodID(stuClass, "setName", "(Ljava/lang/String;)V");
+    jstring name1 = env->NewStringUTF("李四"); env->CallVoidMethod(person, setName, name1);
+    //注意释放DeleteLocalRef & ReleaseStringUTFChars
+
+    //创建一个全局变量，jni会出现弹栈回收的情况，长周期变量需要设置成全局引用
+    if(!stu){
+        jclass tempStu=env->FindClass("com/pvting/cppdemo/Stu");
+        stu = (jclass)env->NewGlobalRef((jobject)tempStu);//提升为全局引用
+        env->DeleteLocalRef(tempStu);
+    }
+    jmethodID dogInit = env->GetMethodID(stu, "<init>", "()V");
+    jobject dog = env->NewObject(stu, dogInit);
+    jmethodID dogInit1 = env->GetMethodID(stu, "<init>", "(I)V");
+    jobject dog1 = env->NewObject(stu, dogInit1, 666);
+    jmethodID dogInit2 = env->GetMethodID(stu, "<init>", "(II)V");
+    jobject dog2 = env->NewObject(stu, dogInit2, 777, 888888);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_pvting_cppdemo_MainActivity_reflectStaticMethod(JNIEnv *env, jobject thiz) {
+    jclass jclass1 = env->FindClass("com/pvting/cppdemo/MainActivity");
+    jmethodID jmethodId = env->GetStaticMethodID(jclass1,"doStatic","(Ljava/lang/String;)V");
+    jstring info = env->NewStringUTF("fff");
+    env->CallStaticVoidMethod(jclass1,jmethodId,info);
+    env->DeleteLocalRef(jclass1);
+    env->DeleteLocalRef(info);
 }
